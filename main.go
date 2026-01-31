@@ -1,14 +1,38 @@
 package main
 
 import (
-        "fmt"
+  "fmt"
 )
 
-func main() {
-        const name = "nigga"
-        const age = 25
+type order struct {
+  id int 
+  amount int
+  status string
+  customer
+}
 
-        msg := fmt.Sprintf("Hello, %s! You are %d years old.", name, age)
-        
-        fmt.Println(msg)
+type customer struct {
+  name string
+}
+
+func main () {
+
+  myOrder := order{
+    id: 1,
+    amount: 100,
+    status: "received",
+  }
+
+  newOrder := order {
+    id: 2,
+    amount: 200,
+    status: "received",
+    customer: customer{
+      name: "John Doe",
+    },
+  }
+  
+  fmt.Println(myOrder)
+
+  fmt.Println(newOrder.customer)
 }
