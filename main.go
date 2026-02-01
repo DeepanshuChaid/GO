@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+  "bufio"
 )
 
 func main() {
@@ -40,7 +41,53 @@ func main() {
   
   defer f.Close()
   
-  f.WriteString(" i like ahhhhhhhh wtf my does sukhmeen comes in my fkin mind")
+  // f.WriteString(" i like ahhhhhhhh wtf my does sukhmeen comes in my fkin mind")
 
-fmt.Println("File created successfully")
+  // bytes := []byte("i definitely like sukhmeen damn bitch ass ai really said that")
+  // f.Write(bytes)
+
+  fmt.Println("File created successfully")
+
+
+  sourceFile, err := os.Open("example.txt")
+  if err != nil {
+     panic(err)
+  }
+
+  defer sourceFile.Close()
+
+  destinationFile, err := os.Create("example_copy.txt")
+  if err != nil {
+     panic(err)
+  }
+
+  defer destinationFile.Close()
+
+  reader := bufio.NewReader(sourceFile)
+  writer := bufio.NewWriter(destinationFile)
+
+  for {
+    b, err := reader.ReadByte()
+    if err != nil {
+      if err.Error() == "EOF" {
+        panic(err)
+      }
+
+      break
+    }
+    
+    e := writer.WriteByte(b)
+    if e != nil {
+      panic(e)
+    }
+    
+  }
+
+  writer.Flush()
+
+
+  fmt.Println("File copied successfully")
+  
 }
+
+
