@@ -2,37 +2,26 @@ package main
 
 import (
   "fmt"
+  "time"
 )
 
-type order struct {
-  id int 
-  amount int
-  status string
-  customer
+func fetchData() string {
+  return "data"
 }
 
-type customer struct {
-  name string
-}
+func main() {
+    resultChan := make(chan int)
 
-func main () {
+    go func() {
+        fmt.Println("Starting slow task...")
+        time.Sleep(2 * time.Second)
+        resultChan <- 42
+        fmt.Println("Sent result!")
+    }()
 
-  myOrder := order{
-    id: 1,
-    amount: 100,
-    status: "received",
-  }
+    fmt.Println("Before waiting...")
 
-  newOrder := order {
-    id: 2,
-    amount: 200,
-    status: "received",
-    customer: customer{
-      name: "John Doe",
-    },
-  }
-  
-  fmt.Println(myOrder)
+    result := <-resultChan  // ⛔ BLOCKS HERE! WAITS!
 
-  fmt.Println(newOrder.customer)
+    fmt.Println("Got result:", result)  // Won't run until channel has data
 }
