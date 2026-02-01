@@ -1,27 +1,38 @@
 package main
 
 import (
-  "fmt"
-  "time"
+	"fmt"
+  "sync"
 )
 
-func fetchData() string {
-  return "data"
+type port struct {
+	views int
+  mu sync.Mutex
+}
+
+func (p *port) increment(w *sync.WaitGroup) {
+  defer func() {
+    w.Done()
+    p.mu.Unlock()
+  }()
+
+  
+  p.mu.Lock()
+	p.views++
 }
 
 func main() {
-    resultChan := make(chan int)
+	myPort := port{views: 0}
 
-    go func() {
-        fmt.Println("Starting slow task...")
-        time.Sleep(2 * time.Second)
-        resultChan <- 42
-        fmt.Println("Sent result!")
-    }()
+  var wg sync.WaitGroup
+  
+	for i := 0; i < 1000; i++ {
+    wg.Add(1)
+    go myPort.increment(&wg)
+  }
 
-    fmt.Println("Before waiting...")
+  wg.Wait()
 
-    result := <-resultChan  // ⛔ BLOCKS HERE! WAITS!
 
-    fmt.Println("Got result:", result)  // Won't run until channel has data
+	fmt.Println(myPort.views)
 }
