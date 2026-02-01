@@ -2,37 +2,35 @@ package main
 
 import (
 	"fmt"
-  "sync"
+	"os"
 )
 
-type port struct {
-	views int
-  mu sync.Mutex
-}
-
-func (p *port) increment(w *sync.WaitGroup) {
-  defer func() {
-    w.Done()
-    p.mu.Unlock()
-  }()
-
-  
-  p.mu.Lock()
-	p.views++
-}
-
 func main() {
-	myPort := port{views: 0}
+  // f, err := os.ReadFile("example.txt")
+  // if err != nil {
+  //   panic(err)
+  // }
 
-  var wg sync.WaitGroup
-  
-	for i := 0; i < 1000; i++ {
-    wg.Add(1)
-    go myPort.increment(&wg)
+  // fmt.Println(string(f))
+
+  dir, err := os.Open(".")
+  if err != nil {
+    panic(err)
   }
 
-  wg.Wait()
+  defer dir.Close()
+
+  fileInfo, err := dir.Readdir(-1)
+
+  for _, file := range fileInfo {
+    fmt.Println(file.Name())
+  }
 
 
-	fmt.Println(myPort.views)
+  // array := []int{1,2,3,4,5,6,7,8,9,10}
+
+  // for i, v := range array {
+  //   fmt.Println(i, v)
+  // }
+
 }
