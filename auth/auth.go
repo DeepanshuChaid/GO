@@ -1,9 +1,15 @@
 package auth
 
 import (
-	"fmt"
+  "fmt"
 )
 
-func Login() {
-	fmt.Println("Login")
+type User struct {
+  Name string
+  Email string
+  Password string
+}
+
+func Login () {
+  fmt.Println("login")
 }
