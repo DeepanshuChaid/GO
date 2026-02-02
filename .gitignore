@@ -20,3 +20,11 @@ gopath/
 
 # Go workspace file
 go.work
+go.work.sum
+
+
+.env
+
+
+config
+storage
