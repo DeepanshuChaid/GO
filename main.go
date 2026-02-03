@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
-
+  "context"
 	"github.com/DeepanshuChaid/GO/internal/config"
 )
 
@@ -29,6 +30,8 @@ func main () {
     Handler: router,
   }
 
+  
+
   var done = make(chan os.Signal, 1)
 
   signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
@@ -42,5 +45,16 @@ func main () {
 
   <-done
 
-  slog
+
+  ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+  defer cancel()
+
+  
+  server.Shutdown()
+  if err != nil {
+    slog.Error("Failed to stop server", slog.String("error", err.Error()))
+  }
+  
+  slog.Info("Server stopped")
+  
 }
