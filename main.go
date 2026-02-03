@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+  "time"
   "context"
 	"github.com/DeepanshuChaid/GO/internal/config"
 )
@@ -30,6 +31,8 @@ func main () {
     Handler: router,
   }
 
+  slog.Info("Starting server", slog.String("address", cfg.Address))
+  fmt.Println("Server started on", cfg.Address)
   
 
   var done = make(chan os.Signal, 1)
