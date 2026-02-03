@@ -51,12 +51,10 @@ func main () {
 
   ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
   defer cancel()
+  fmt.Println(ctx)
 
   
   server.Shutdown()
-  if err != nil {
-    slog.Error("Failed to stop server", slog.String("error", err.Error()))
-  }
   
   slog.Info("Server stopped")
   
