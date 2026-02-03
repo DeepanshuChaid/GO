@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"syscall"
 
 	"github.com/DeepanshuChaid/GO/internal/config"
 )
@@ -30,7 +31,7 @@ func main () {
 
   var done = make(chan os.Signal, 1)
 
-  signal.Notify(done, os.Interrupt, sysca)
+  signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
   
   go func (){
     err := server.ListenAndServe()
