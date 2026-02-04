@@ -23,6 +23,8 @@ func New() http.HandlerFunc{
     }
     
     slog.Info("Creating a student")
+
+    response.WriteJson(w, http.StatusOK, map[string]string{"message": "Student created"})
     
     w.Write([]byte("Hello World"))
   }
