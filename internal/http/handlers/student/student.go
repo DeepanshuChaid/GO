@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/DeepanshuChaid/GO/internal/http/utils/response"
 	"github.com/DeepanshuChaid/GO/internal/types"
 )
   
@@ -17,8 +18,8 @@ func New() http.HandlerFunc{
 
     err := json.NewDecoder(r.Body).Decode(&student)
     if errors.Is(err, io.EOF) {
-      slog.Error("Error decoding student", slog.String("error", err.Error()))
-      w.WriteHeader(http.StatusBadRequest)
+      response.WriteJson(w, http.StatusBadRequest, map[string]string{"error": "request body is empty"})
+      return
     }
     
     slog.Info("Creating a student")
