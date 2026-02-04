@@ -54,7 +54,9 @@ func main () {
   fmt.Println(ctx)
 
   
-  server.Shutdown()
+  if err := server.Shutdown(ctx); err != nil {
+    slog.Error("Server shutdown failed", slog.String("error", err.Error()))
+  }
   
   slog.Info("Server stopped")
   
