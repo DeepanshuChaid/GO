@@ -11,6 +11,7 @@ import (
   "time"
   "context"
 	"github.com/DeepanshuChaid/GO/internal/config"
+      "github.com/DeepanshuChaid/GO/internal/http/handlers/student"
 )
 
 
@@ -21,9 +22,7 @@ func main () {
 
   router := http.NewServeMux()
 
-  router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello World")
-  })
+  router.HandleFunc("GET /api/students", student.New())
 
 
   server := http.Server{
