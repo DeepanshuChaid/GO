@@ -7,6 +7,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+  // "github.com/DeepanshuChaid/GO/internal/storage"
 
 	"github.com/DeepanshuChaid/GO/internal/http/utils/response"
 	"github.com/DeepanshuChaid/GO/internal/types"
@@ -37,6 +38,12 @@ func New() http.HandlerFunc{
       response.WriteJson(w, http.StatusBadRequest, response.ValidateError(validate))
       return
     }
+
+    // id, err := storage.CreateStudent(
+    //   student.Name,
+    //   student.Email,
+    //   student.Age,
+    // )
     
     slog.Info("Creating a student")
 
