@@ -31,8 +31,11 @@ func New() http.HandlerFunc{
     
     // request validation 
     
-    if err := validator.New().Struct(student); err := nil {
+    if err := validator.New().Struct(student); err != nil {
+      validate := err.(validator.ValidationErrors)
       
+      response.WriteJson(w, http.StatusBadRequest, response.ValidateError(validate))
+      return
     }
     
     slog.Info("Creating a student")

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"fmt"
+	"strings"
 	"github.com/go-playground/validator/v10"
 )
 
@@ -33,7 +34,7 @@ func GenralError(err error) Response {
   }
 }
 
-func validateError(errs validator.ValidationErrors) Response {
+func ValidateError(errs validator.ValidationErrors) Response {
 	var errMsgs []string
 
 	for _, err := range errs {
@@ -45,7 +46,7 @@ func validateError(errs validator.ValidationErrors) Response {
 		}
 	}
 
-	return Resposne{
+	return Response{
 		Status: StatusError,
 		Error: strings.Join(errMsgs, ", "),
 	}
