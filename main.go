@@ -12,6 +12,7 @@ import (
   "context"
 	"github.com/DeepanshuChaid/GO/internal/config"
       "github.com/DeepanshuChaid/GO/internal/http/handlers/student"
+      "github.com/DeepanshuChaid/GO/internal/storage/sqlite"
 )
 
 
@@ -19,7 +20,13 @@ func main () {
 
   cfg := config.MustLoad()
 
+  _, err := sqlite.New(cfg)
+  if err != nil {
+    log.Fatal(err)
+  } 
 
+  slog.Info("Storage initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"))
+  
   router := http.NewServeMux()
 
   router.HandleFunc("/api/students", student.New())

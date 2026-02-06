@@ -18,7 +18,7 @@
 # vendor/
 gopath/
 
-# Go workspace file
+# Go file
 go.work
 go.work.sum
 
