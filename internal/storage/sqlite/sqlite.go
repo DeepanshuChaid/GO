@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/DeepanshuChaid/GO/internal/config"
-  // "github.com/mattn/go-sqlite3"
+  "github.com/mattn/go-sqlite3"
 )
 
 
@@ -28,6 +28,7 @@ func New(cfg *config.Config) (*Sqlite, error) {
   if err != nil {
     return nil, err
   }
+  
 
   return &Sqlite{
     Db: db,
@@ -40,6 +41,7 @@ func (s *Sqlite) CreateStudent(name string, email string, age int) (int64, error
     return 0, err
   }
   defer statement.Close()
+
 
   result, err := statement.Exec(name, email, age)
   if err != nil {
