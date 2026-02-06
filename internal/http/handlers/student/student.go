@@ -12,9 +12,11 @@ import (
 	"github.com/DeepanshuChaid/GO/internal/http/utils/response"
 	"github.com/DeepanshuChaid/GO/internal/types"
 	"github.com/go-playground/validator/v10"
+
+  "github.com/DeepanshuChaid/GO/internal/storage"
 )
   
-func New() http.HandlerFunc{
+func New(storage storage.Storage) http.HandlerFunc{
   return func(w http.ResponseWriter, r *http.Request) {
 
     var student types.Student;
