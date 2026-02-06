@@ -41,15 +41,18 @@ func New(storage storage.Storage) http.HandlerFunc{
       return
     }
 
-    // id, err := storage.CreateStudent(
-    //   student.Name,
-    //   student.Email,
-    //   student.Age,
-    // )
-    
-    slog.Info("Creating a student")
+    id, err := storage.CreateStudent(
+      student.Name,
+      student.Email,
+      student.Age,
+    )
+    if err != nil{
+      response.WriteJson(w, http.StatusInternalServerError, response.GenralError(err))
+      return 
+    }
+    slog.Info("Creating a student", id)
 
-    response.WriteJson(w, http.StatusOK, map[string]string{"message": "Student created"})
+    response.WriteJson(w, http.StatusOK, map[string]string{"message": "Student created", "id": fmt.Sprintf("%d", id)})
     
     // w.Write([]byte("Hello World"))
   }
