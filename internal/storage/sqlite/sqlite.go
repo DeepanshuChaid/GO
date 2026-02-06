@@ -4,7 +4,6 @@ import (
 	"database/sql"
 
 	"github.com/DeepanshuChaid/GO/internal/config"
-  "github.com/mattn/go-sqlite3"
 )
 
 
@@ -32,4 +31,24 @@ func New(cfg *config.Config) (*Sqlite, error) {
   return &Sqlite{
     Db: db,
   }, nil
+}
+
+func (s *Sqlite) CreateStudent(name string, email string, age int) (int64, error) {
+  statement, err := s.Db.Prepare("INSERT INTO students (name, email, age) VALUES (?, ?, ?)")
+  if err != nil {
+    return 0, err
+  }
+  defer statement.Close()
+
+  result, err := statement.Exec(name, email, age)
+  if err != nil {
+    return 0, err
+  }
+
+  id, err := result.LastInsertId()
+  if err != nil {
+    return 0, err
+  }
+
+  return id, nil
 }
