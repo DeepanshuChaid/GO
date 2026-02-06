@@ -3,12 +3,14 @@ package student
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
 
 	"github.com/DeepanshuChaid/GO/internal/http/utils/response"
 	"github.com/DeepanshuChaid/GO/internal/types"
+	"github.com/go-playground/validator/v10"
 )
   
 func New() http.HandlerFunc{
@@ -16,16 +18,28 @@ func New() http.HandlerFunc{
 
     var student types.Student;
 
+    // err := json.NewDecoder(r.Body).Decode(&student)
     err := json.NewDecoder(r.Body).Decode(&student)
     if errors.Is(err, io.EOF) {
-      response.WriteJson(w, http.StatusBadRequest, map[string]string{"error": "request body is empty"})
+      response.WriteJson(w, http.StatusBadRequest, response.GenralError(fmt.Errorf("Request body is empty")))
       return
+    }
+
+    if err != nil {
+      response.WriteJson(w, http.StatusBadRequest, response.GenralError(err))
+    }
+    
+    // request validation 
+    
+    if err := validator.New().Struct(student); err := nil {
+      
     }
     
     slog.Info("Creating a student")
 
     response.WriteJson(w, http.StatusOK, map[string]string{"message": "Student created"})
     
-    w.Write([]byte("Hello World"))
+    // w.Write([]byte("Hello World"))
   }
 }
+

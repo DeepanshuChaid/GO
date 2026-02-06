@@ -22,7 +22,7 @@ func main () {
 
   router := http.NewServeMux()
 
-  router.HandleFunc("GET /api/students", student.New())
+  router.HandleFunc("/api/students", student.New())
 
 
   server := http.Server{
