@@ -1,10 +1,10 @@
 package sqlite
 
 import (
-	"database/sql"
+        "database/sql"
 
-	"github.com/DeepanshuChaid/GO/internal/config"
-  // "github.com/mattn/go-sqlite3"
+        "github.com/DeepanshuChaid/GO/internal/config"
+        _ "github.com/mattn/go-sqlite3"
 )
 
 
