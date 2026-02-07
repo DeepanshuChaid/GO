@@ -78,3 +78,23 @@ func (s *Sqlite) GetStudentById(id int64) (types.Student, error) {
   
   return student, nil
 }
+
+
+func (s *Sqlite) GetStudents() ([]types.Student, error) {
+  statement, err := s.Db.Prepare(`SELECT id, name, email, age FROM students`)
+  if err != nil {
+    return nil, err
+  }
+
+  defer statement.Close()
+
+  rows, err = statement.Query()
+  if err != nil {
+    return nil, err
+  }
+  defer rows.Close()
+
+  var students []types.Student
+
+  
+}
