@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"log/slog"
-	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
+        "fmt"
+        "log"
+        "log/slog"
+        "net/http"
+        "os"
+        "os/signal"
+        "syscall"
   "time"
   "context"
-	"github.com/DeepanshuChaid/GO/internal/config"
+        "github.com/DeepanshuChaid/GO/internal/config"
       "github.com/DeepanshuChaid/GO/internal/http/handlers/student"
       "github.com/DeepanshuChaid/GO/internal/storage/sqlite"
 )
@@ -40,6 +40,7 @@ func main () {
 
   slog.Info("Starting server", slog.String("address", cfg.Address))
   fmt.Println("Server started on", cfg.Address)
+  fmt.Println("Access the server at http://0.0.0.0:5000")
   
 
   var done = make(chan os.Signal, 1)

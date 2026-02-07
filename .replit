@@ -37,14 +37,19 @@ args = "Run app"
 name = "Run app"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "go run main.go"
-
-[workflows.workflow.metadata]
-outputType = "console"
+args = "CONFIG_PATH=config/local.yaml go run main.go"
+waitForPort = 5000
 
 [[ports]]
 localPort = 3000
 externalPort = 80
 exposeLocalhost = true
+
+[[ports]]
+localPort = 5000
+externalPort = 80
