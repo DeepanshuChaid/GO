@@ -7,13 +7,15 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-  // "github.com/DeepanshuChaid/GO/internal/storage"
+	"strconv"
+
+	// "github.com/DeepanshuChaid/GO/internal/storage"
 
 	"github.com/DeepanshuChaid/GO/internal/http/utils/response"
 	"github.com/DeepanshuChaid/GO/internal/types"
 	"github.com/go-playground/validator/v10"
 
-  "github.com/DeepanshuChaid/GO/internal/storage"
+	"github.com/DeepanshuChaid/GO/internal/storage"
 )
 
   
@@ -65,8 +67,21 @@ func GetById (storage storage.Storage) http.HandlerFunc {
   return func(w http.ResponseWriter, r *http.Request) {
 
     id := r.PathValue("id")
-
+    slog.Info("getting a student", slog.String("id", id))
     
-    slog.Info("niga", slog.String("id", ))
+    intId, err := strconv.ParseInt(id, 10, 64)
+    if err != nil {
+      response.WriteJson(w, http.StatusBadRequest, response.GenralError(err))
+      return
+    }
+    student, err := storage.GetStudentById(intId)
+
+    if err != nil {
+      slog.Error("Failed to get student", slog.String("error", err.Error()))
+      response.WriteJson(w, http.StatusInternalServerError, response.GenralError(err))
+      return
+    }
+
+    response.WriteJson(w, http.StatusOK, student)
   }
 }

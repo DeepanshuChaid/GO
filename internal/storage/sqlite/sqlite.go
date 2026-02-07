@@ -1,10 +1,12 @@
 package sqlite
 
 import (
-	"database/sql"
+        "database/sql"
+        "fmt"
 
-	"github.com/DeepanshuChaid/GO/internal/config"
-  _ "github.com/mattn/go-sqlite3"
+        "github.com/DeepanshuChaid/GO/internal/config"
+        _ "github.com/mattn/go-sqlite3"
+        "github.com/DeepanshuChaid/GO/internal/types"
 )
 
 
@@ -54,4 +56,26 @@ func (s *Sqlite) CreateStudent(name string, email string, age int) (int64, error
   }
 
   return id, nil
+}
+
+func (s *Sqlite) GetStudentById(id int64) (types.Student, error) {
+  statement, err := s.Db.Prepare(`SELECT * FROM students WHERE id = ? LIMIT 1`)
+  if err != nil {
+    return types.Student{}, err
+  }
+
+  defer statement.Close()
+
+  var student types.Student
+
+  err = statement.QueryRow(id).Scan(&student.Id, &student.Name, &student.Email, &student.Age)
+  if err != nil {
+    if err == sql.ErrNoRows {
+      return types.Student{}, fmt.Errorf("Student not found")
+    }
+    
+    return types.Student{}, fmt.Errorf("QueryRow failed: %v", err)
+  }
+  
+  return student, nil
 }
