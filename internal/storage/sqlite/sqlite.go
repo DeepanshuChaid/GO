@@ -1,12 +1,11 @@
 package sqlite
 
 import (
-        "database/sql"
-        "fmt"
-
-        "github.com/DeepanshuChaid/GO/internal/config"
-        _ "github.com/mattn/go-sqlite3"
-        "github.com/DeepanshuChaid/GO/internal/types"
+	"database/sql"
+  "fmt"
+	"github.com/DeepanshuChaid/GO/internal/config"
+	_ "github.com/mattn/go-sqlite3"
+  "github.com/DeepanshuChaid/GO/internal/types"
 )
 
 
