@@ -105,5 +105,7 @@ func (s *Sqlite) GetStudents() ([]types.Student, error) {
     }
     students = append(students, student)
   }
+
+  return students, nil
   
 }
