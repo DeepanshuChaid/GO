@@ -33,6 +33,8 @@ func main () {
 
   router.HandleFunc("/api/students/{id}", student.GetById(storage))
 
+  router.HandleFunc("/", students.GetList(storage))
+
   server := http.Server{
     Addr: cfg.Address,
     Handler: router,
