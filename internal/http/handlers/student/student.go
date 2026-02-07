@@ -15,6 +15,7 @@ import (
 
   "github.com/DeepanshuChaid/GO/internal/storage"
 )
+
   
 func New(storage storage.Storage) http.HandlerFunc{
   return func(w http.ResponseWriter, r *http.Request) {
@@ -58,3 +59,14 @@ func New(storage storage.Storage) http.HandlerFunc{
   }
 }
 
+
+
+func GetById (storage storage.Storage) http.HandlerFunc {
+  return func(w http.ResponseWriter, r *http.Request) {
+
+    id := r.PathValue("id")
+
+    
+    slog.Info("niga", slog.String("id", ))
+  }
+}

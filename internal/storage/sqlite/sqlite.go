@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/DeepanshuChaid/GO/internal/config"
-  "github.com/mattn/go-sqlite3"
+  _ "github.com/mattn/go-sqlite3"
 )
 
 
