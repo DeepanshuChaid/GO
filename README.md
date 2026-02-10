@@ -1,4 +1,4 @@
 ## Student api
 post
 get
- i hate myself even more
+ i hate myself a bit even more
