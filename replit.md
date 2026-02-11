@@ -77,3 +77,5 @@ Preferred communication style: Simple, everyday language.
 - The `.env` file (if present) is loaded for environment-based configuration
 - Configuration struct tags likely use `cleanenv` conventions (`env:`, `env-default:`, etc.)
 - Validation uses struct tags with `validate:` annotations from `go-playground/validator`
+
+- why be normal when you can be a airhead
