@@ -78,4 +78,3 @@ Preferred communication style: Simple, everyday language.
 - Configuration struct tags likely use `cleanenv` conventions (`env:`, `env-default:`, etc.)
 - Validation uses struct tags with `validate:` annotations from `go-playground/validator`
 
-- why be normal when you can be a airhead
