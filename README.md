@@ -1,3 +1,3 @@
 ## Student api
 
-## why be normal when you can be airheaded
+# why be normal when you can be airheaded
