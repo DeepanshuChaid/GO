@@ -24,7 +24,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("i hate kids")
+	fmt.Println("i hate kids & women")
 
 	slog.Info("Storage initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"))
 
