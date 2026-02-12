@@ -24,8 +24,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("i hate kids & women & humans")
-
 	slog.Info("Storage initialized", slog.String("env", cfg.Env), slog.String("version", "1.0.0"))
 
 	router := http.NewServeMux()
