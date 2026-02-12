@@ -69,3 +69,5 @@ func main() {
 	slog.Info("Server stopped")
 
 }
+
+sorry for cheating🤌😩
